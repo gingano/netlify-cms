@@ -9,6 +9,7 @@ import BlogRoll from '../components/BlogRoll'
 export const IndexPageTemplate = ({
   image,
   title,
+  subTitle,
   heading,
   subheading,
   mainpitch,
@@ -49,6 +50,19 @@ export const IndexPageTemplate = ({
         >
           {title}
         </h1>
+        <h2
+          className="has-text-weight-bold is-size-3-mobile is-size-2-tablet is-size-1-widescreen"
+          style={{
+            boxShadow:
+              'rgb(255, 68, 0) 0.5rem 0px 0px, rgb(255, 68, 0) -0.5rem 0px 0px',
+            backgroundColor: 'rgb(255, 68, 0)',
+            color: 'white',
+            lineHeight: '1',
+            padding: '0.25em',
+          }}
+        >
+          {subTitle}
+        </h2>
         <h3
           className="has-text-weight-bold is-size-5-mobile is-size-5-tablet is-size-4-widescreen"
           style={{
@@ -73,7 +87,8 @@ export const IndexPageTemplate = ({
                 <div className="content">
                   <div className="tile">
                     <h1 className="title">{mainpitch.title}</h1>
-                  </div>
+                    </div>
+                  <h2 className="title">{mainpitch.subTitle}</h2>
                   <div className="tile">
                     <h3 className="subtitle">{mainpitch.description}</h3>
                   </div>
@@ -134,6 +149,7 @@ const IndexPage = ({ data }) => {
       <IndexPageTemplate
         image={frontmatter.image}
         title={frontmatter.title}
+        subTitle={frontmatter.subtitle}
         heading={frontmatter.heading}
         subheading={frontmatter.subheading}
         mainpitch={frontmatter.mainpitch}
@@ -159,6 +175,7 @@ export const pageQuery = graphql`
     markdownRemark(frontmatter: { templateKey: { eq: "index-page" } }) {
       frontmatter {
         title
+        subtitle
         image {
           childImageSharp {
             fluid(maxWidth: 2048, quality: 100) {
@@ -170,6 +187,7 @@ export const pageQuery = graphql`
         subheading
         mainpitch {
           title
+          subTitle
           description
         }
         description
